@@ -1,18 +1,17 @@
 package com.orange.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.orange.model.common.dtos.ResponseResult;
-import com.orange.model.user.dtos.LoginDto;
-import com.orange.model.user.pojos.ApUser;
+import com.orange.model.user.dto.LoginDTO;
+import com.orange.model.user.pojo.ApUser;
+import com.orange.model.user.vo.LoginVO;
 
 public interface ApUserService extends IService<ApUser> {
 
     /**
      * app端登录功能
      * 
-     * @param dto
-     * @return
+     * @param dto 登录数据
      */
-    public ResponseResult login(LoginDto dto);
+    LoginVO login(LoginDTO dto);
 
 }

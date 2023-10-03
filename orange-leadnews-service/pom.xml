@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>orange-leadnews-user</module>
+        <module>orange-leadnews-article</module>
     </modules>
 
     <properties>

@@ -1,4 +1,4 @@
-package com.orange.model.user.pojos;
+package com.orange.model.user.pojo;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,11 +11,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
- * <p>
  * APP用户信息表
- * </p>
  *
- * @author itheima
+ * @author Jeong Geol
  */
 @Data
 @TableName("ap_user")

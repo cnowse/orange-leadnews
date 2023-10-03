@@ -1,10 +1,12 @@
-package com.orange.model.user.dtos;
+package com.orange.model.user.dto;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-public class LoginDto {
+@ApiModel("用户登录数据")
+public class LoginDTO {
 
     /**
      * 手机号

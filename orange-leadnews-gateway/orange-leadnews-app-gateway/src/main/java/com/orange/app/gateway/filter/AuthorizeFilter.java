@@ -17,8 +17,8 @@ import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 
-@Component
 @Slf4j
+@Component
 public class AuthorizeFilter implements Ordered, GlobalFilter {
 
     @Override
@@ -38,6 +38,7 @@ public class AuthorizeFilter implements Ordered, GlobalFilter {
 
         // 4.判断token是否存在
         if (StringUtils.isBlank(token)) {
+            log.warn("Token doesn't exist [{} {}]", request.getMethod(), request.getURI());
             response.setStatusCode(HttpStatus.UNAUTHORIZED);
             return response.setComplete();
         }
@@ -48,11 +49,12 @@ public class AuthorizeFilter implements Ordered, GlobalFilter {
             // 是否是过期
             int result = AppJwtUtil.verifyToken(claimsBody);
             if (result == 1 || result == 2) {
+                log.info("Token has expired [{} {}]", request.getMethod(), request.getURI());
                 response.setStatusCode(HttpStatus.UNAUTHORIZED);
                 return response.setComplete();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.info("Error in parsing Token validity period [{} {}]", request.getMethod(), request.getURI());
             response.setStatusCode(HttpStatus.UNAUTHORIZED);
             return response.setComplete();
         }
@@ -62,9 +64,7 @@ public class AuthorizeFilter implements Ordered, GlobalFilter {
     }
 
     /**
-     * 优先级设置 值越小 优先级越高
-     * 
-     * @return
+     * 优先级设置，值越小，优先级越高。
      */
     @Override
     public int getOrder() {

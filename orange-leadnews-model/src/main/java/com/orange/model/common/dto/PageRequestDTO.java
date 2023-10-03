@@ -1,11 +1,11 @@
-package com.orange.model.common.dtos;
+package com.orange.model.common.dto;
 
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Data
 @Slf4j
-public class PageRequestDto {
+public class PageRequestDTO {
 
     protected Integer size;
     protected Integer page;

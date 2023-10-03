@@ -1,4 +1,4 @@
-package com.orange.model.common.dtos;
+package com.orange.model.common.dto;
 
 import java.io.Serializable;
 

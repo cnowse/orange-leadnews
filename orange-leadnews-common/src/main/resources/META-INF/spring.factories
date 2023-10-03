@@ -1,4 +1,6 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.orange.common.exception.ExceptionCatch,\
   com.orange.common.swagger.SwaggerConfiguration,\
-  com.orange.common.swagger.Swagger2Configuration
+  com.orange.common.swagger.Swagger2Configuration, \
+  com.orange.common.web.WebApiResponseBodyAdvice, \
+  com.orange.common.web.GlobalConfiguration

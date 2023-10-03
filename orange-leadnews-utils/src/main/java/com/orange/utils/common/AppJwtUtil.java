@@ -27,7 +27,7 @@ public class AppJwtUtil {
     private static final int REFRESH_TIME = 300;
 
     // 生产ID
-    public static String getToken(Long id) {
+    public static String getToken(Integer id) {
         Map<String, Object> claimMaps = new HashMap<>();
         claimMaps.put("id", id);
         long currentTime = System.currentTimeMillis();
@@ -35,7 +35,7 @@ public class AppJwtUtil {
                 .setId(UUID.randomUUID().toString())
                 .setIssuedAt(new Date(currentTime)) // 签发时间
                 .setSubject("system") // 说明
-                .setIssuer("heima") // 签发者信息
+                .setIssuer("orange") // 签发者信息
                 .setAudience("app") // 接收用户
                 .compressWith(CompressionCodecs.GZIP) // 数据压缩方式
                 .signWith(SignatureAlgorithm.HS512, generalKey()) // 加密方式
@@ -120,7 +120,7 @@ public class AppJwtUtil {
     public static void main(String[] args) {
         /* Map map = new HashMap();
         map.put("id","11");*/
-        System.out.println(AppJwtUtil.getToken(1102L));
+        System.out.println(AppJwtUtil.getToken(1102));
         Jws<Claims> jws = AppJwtUtil.getJws(
                 "eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ.H4sIAAAAAAAAADWLQQqEMAwA_5KzhURNt_qb1KZYQSi0wi6Lf9942NsMw3zh6AVW2DYmDGl2WabkZgreCaM6VXzhFBfJMcMARTqsxIG9Z888QLui3e3Tup5Pb81013KKmVzJTGo11nf9n8v4nMUaEY73DzTabjmDAAAA.4SuqQ42IGqCgBai6qd4RaVpVxTlZIWC826QA9kLvt9d-yVUw82gU47HDaSfOzgAcloZedYNNpUcd18Ne8vvjQA");
         Claims claims = jws.getBody();

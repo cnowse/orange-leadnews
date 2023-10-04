@@ -17,6 +17,7 @@
         <module>orange-leadnews-service</module>
         <module>orange-leadnews-gateway</module>
         <module>orange-leadnews-test</module>
+        <module>orange-leadnews-test/freemarker-demo</module>
     </modules>
 
     <!-- 继承Spring boot工程 -->

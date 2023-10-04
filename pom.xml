@@ -18,6 +18,7 @@
         <module>orange-leadnews-gateway</module>
         <module>orange-leadnews-test</module>
         <module>orange-leadnews-test/freemarker-demo</module>
+        <module>orange-leadnews-test/minio-demo</module>
     </modules>
 
     <!-- 继承Spring boot工程 -->
@@ -110,6 +111,12 @@
             <dependency>
                 <artifactId>orange-leadnews-utils</artifactId>
                 <groupId>com.orange</groupId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.orange</groupId>
+                <artifactId>orange-file-starter</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

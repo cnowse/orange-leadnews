@@ -64,3 +64,36 @@ ObjectMapper configObjectMapper() {
 }
 ```
 
+
+
+# CentOS日期问题
+
+使用 VMWare 创建的 CentOS 7 虚拟机，将中间件都以 Docker 容器部署，在操作 MinIO 以及其他一些中间件时，总是提示虚拟时间有问题，例如使用 MinIO 上传文件时报错。
+
+```
+The difference between the request time and the server's time is too large.
+```
+
+在虚拟机中安装 NTP（Network Time Protocol）服务来自动同步时间。
+
+```shell
+# 查看当前系统时间
+date
+# 安装 NTP 并启动，设置开启自启
+yum -y install ntp
+systemctl start ntpd
+systemctl enable ntpd
+```
+
+启动 NTP 后，过一段时间便会自动同步时间，如果未同步，则可手动同步。
+
+```shell
+ntpdate pool.ntp.org
+```
+
+还可以手动设置时间。
+
+```shell
+date -s "2023-09-30 12:00:00"
+```
+

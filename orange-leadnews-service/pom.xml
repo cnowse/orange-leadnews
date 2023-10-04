@@ -14,6 +14,7 @@
     <modules>
         <module>orange-leadnews-user</module>
         <module>orange-leadnews-article</module>
+        <module>orange-leadnews-wemedia</module>
     </modules>
 
     <properties>

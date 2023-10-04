@@ -25,7 +25,8 @@ import lombok.extern.slf4j.Slf4j;
  * @author Jeong Geol
  */
 @Slf4j
-@RestControllerAdvice(value = {"com.orange.user.controller", "com.orange.article.controller"})
+@RestControllerAdvice(value = {"com.orange.user.controller", "com.orange.article.controller",
+        "com.orange.wemedia.controller"})
 public class WebApiResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
     @Override

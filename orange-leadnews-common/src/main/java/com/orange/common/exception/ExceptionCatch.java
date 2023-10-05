@@ -18,7 +18,7 @@ public class ExceptionCatch {
      * 其他异常捕获
      */
     @ExceptionHandler(Exception.class)
-    public ResponseResult<?> exception(Exception e) {
+    public ResponseResult exception(Exception e) {
         log.error("catch exception:{}", e.getMessage());
         return ResponseResult.errorResult(AppHttpCodeEnum.SERVER_ERROR);
     }
@@ -27,7 +27,7 @@ public class ExceptionCatch {
      * 自定义异常捕获
      */
     @ExceptionHandler(CustomException.class)
-    public ResponseResult<?> exception(CustomException e, HttpServletRequest req) {
+    public ResponseResult exception(CustomException e, HttpServletRequest req) {
         log.error("Error when :[{} {}] msg={}", req.getMethod(), req.getRequestURI(),
                 e.getMessage() == null ? e.getCode() : e.getMessage());
         if (e.getMessage() != null) {

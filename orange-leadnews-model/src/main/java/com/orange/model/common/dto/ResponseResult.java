@@ -1,21 +1,22 @@
 package com.orange.model.common.dto;
 
-import java.io.Serializable;
-
 import com.orange.model.common.enums.AppHttpCodeEnum;
 
-import lombok.Getter;
+import lombok.Data;
 
 /**
  * 通用的结果返回类
  */
-@Getter
-public class ResponseResult<T> implements Serializable {
+@Data
+public class ResponseResult {
 
     private String host;
     private Integer code;
     private String errorMessage;
-    private T data;
+    private Object data;
+    private Long currentPage;
+    private Long size;
+    private Long total;
 
     public ResponseResult() {
         this.code = AppHttpCodeEnum.SUCCESS.getCode();
@@ -31,8 +32,16 @@ public class ResponseResult<T> implements Serializable {
         this.errorMessage = errorMessage;
     }
 
-    public ResponseResult(T data) {
+    public ResponseResult(Object data) {
         this.code = AppHttpCodeEnum.SUCCESS.getCode();
+        this.data = data;
+    }
+
+    public ResponseResult(Long currentPage, Long size, Long total, Object data) {
+        this.code = AppHttpCodeEnum.SUCCESS.getCode();
+        this.currentPage = currentPage;
+        this.size = size;
+        this.total = total;
         this.data = data;
     }
 
@@ -42,8 +51,8 @@ public class ResponseResult<T> implements Serializable {
      * @return ResponseResult
      * @author Jeong Geol
      */
-    public static ResponseResult<?> okResult() {
-        return new ResponseResult<>();
+    public static ResponseResult okResult() {
+        return new ResponseResult();
     }
 
     /**
@@ -53,8 +62,8 @@ public class ResponseResult<T> implements Serializable {
      * @return ResponseResult
      * @author Jeong Geol
      */
-    public static <T> ResponseResult<T> okResult(T data) {
-        return new ResponseResult<>(data);
+    public static ResponseResult okResult(Object data) {
+        return new ResponseResult(data);
     }
 
     /**
@@ -64,8 +73,8 @@ public class ResponseResult<T> implements Serializable {
      * @return ResponseResult
      * @author Jeong Geol
      */
-    public static ResponseResult<?> errorResult(AppHttpCodeEnum code) {
-        return new ResponseResult<>(code);
+    public static ResponseResult errorResult(AppHttpCodeEnum code) {
+        return new ResponseResult(code);
     }
 
     /**
@@ -76,8 +85,22 @@ public class ResponseResult<T> implements Serializable {
      * @return ResponseResult
      * @author Jeong Geol
      */
-    public static ResponseResult<?> errorResult(AppHttpCodeEnum code, String errorMessage) {
-        return new ResponseResult<>(code, errorMessage);
+    public static ResponseResult errorResult(AppHttpCodeEnum code, String errorMessage) {
+        return new ResponseResult(code, errorMessage);
+    }
+
+    /**
+     * 操作成功，返回分页数据。
+     *
+     * @param currentPage 当前页
+     * @param size 当前页数据量
+     * @param total 总数据量
+     * @param data 数据
+     * @return ResponseResult
+     * @author Jeong Geol
+     */
+    public static ResponseResult pageResult(Long currentPage, Long size, Long total, Object data) {
+        return new ResponseResult(currentPage, size, total, data);
     }
 
 }

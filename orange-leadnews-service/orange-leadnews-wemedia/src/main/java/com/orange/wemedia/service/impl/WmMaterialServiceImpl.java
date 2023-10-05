@@ -9,10 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.orange.common.exception.CustomException;
 import com.orange.file.service.FileStorageService;
 import com.orange.model.common.enums.AppHttpCodeEnum;
+import com.orange.model.wemedia.dto.WmMaterialDTO;
 import com.orange.model.wemedia.pojo.WmMaterial;
 import com.orange.utils.thread.WmThreadLocalUtil;
 import com.orange.wemedia.mapper.WmMaterialMapper;
@@ -55,6 +57,14 @@ public class WmMaterialServiceImpl extends ServiceImpl<WmMaterialMapper, WmMater
         wmMaterial.setType((short)0);
         wmMaterial.setCreatedTime(LocalDateTime.now());
         this.save(wmMaterial);
+    }
+
+    @Override
+    public Page<WmMaterial> listMaterialByCondition(WmMaterialDTO dto) {
+        return this.lambdaQuery().eq(WmMaterial::getUserId, WmThreadLocalUtil.getUser().getId())
+                .eq(dto.getIsCollection() != null, WmMaterial::getIsCollection, dto.getIsCollection())
+                .orderByDesc(WmMaterial::getCreatedTime).page(new Page<>(dto.getPage(), dto.getSize()));
+
     }
 
 }

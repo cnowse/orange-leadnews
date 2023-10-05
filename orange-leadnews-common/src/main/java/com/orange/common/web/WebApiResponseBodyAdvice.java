@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.orange.model.common.dto.ResponseResult;
 
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +27,7 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @RestControllerAdvice(value = {"com.orange.user.controller", "com.orange.article.controller",
-        "com.orange.wemedia.controller"})
+    "com.orange.wemedia.controller"})
 public class WebApiResponseBodyAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
@@ -53,9 +54,10 @@ public class WebApiResponseBodyAdvice implements ResponseBodyAdvice<Object> {
         if (Void.TYPE.equals(gpt)) {
             return ResponseResult.okResult();
         }
-        /* if (body instanceof Page) {
-            return ApiResult.success((Page<?>)body);
-        } */
+        if (body instanceof Page) {
+            Page<?> page = (Page<?>)body;
+            return ResponseResult.pageResult(page.getCurrent(), page.getSize(), page.getTotal(), page.getRecords());
+        }
         return ResponseResult.okResult(body);
     }
 

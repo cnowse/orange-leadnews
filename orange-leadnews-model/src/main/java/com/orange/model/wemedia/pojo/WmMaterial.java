@@ -7,6 +7,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 
 import lombok.Data;
 
+/**
+ * 素材表
+ */
 @Data
 public class WmMaterial {
 

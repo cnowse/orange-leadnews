@@ -52,10 +52,9 @@ public class AuthorizeFilter implements Ordered, GlobalFilter {
                 return response.setComplete();
             }
 
-            String userId = (String)claimsBody.get("id");
-            ServerHttpRequest serverHttpRequest = request.mutate().headers(httpHeaders -> {
-                httpHeaders.add("userId", userId);
-            }).build();
+            String userId = Integer.toString((Integer)claimsBody.get("id"));
+            ServerHttpRequest serverHttpRequest =
+                    request.mutate().headers(httpHeaders -> httpHeaders.add("userId", userId)).build();
             exchange.mutate().request(serverHttpRequest);
         } catch (Exception e) {
             e.printStackTrace();

@@ -21,6 +21,6 @@ public class WmMaterial {
 
     private Short isCollection;
 
-    private LocalDateTime createTime;
+    private LocalDateTime createdTime;
 
 }

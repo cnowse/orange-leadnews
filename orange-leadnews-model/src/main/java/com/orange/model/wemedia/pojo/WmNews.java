@@ -98,7 +98,7 @@ public class WmNews implements Serializable {
     private Long articleId;
 
     /**
-     * //图片用逗号分隔
+     * 图片用逗号分隔
      */
     @TableField("images")
     private String images;
